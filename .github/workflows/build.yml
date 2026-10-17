@@ -20,11 +20,11 @@ jobs:
 
     - name: Create Xcode Project & Build IPA
       run: |
-        # إنشاء هيكل مشروع Xcode سليم ومنسق
+        # إنشاء هيكل مشروع Xcode باستخدام بايثون لضمان سلامة التنسيق
         mkdir -p AthkarApp.xcodeproj
         
-        cat << 'EOF' > AthkarApp.xcodeproj/project.pbxproj
-        // !$*UTF8*$!
+        python3 -c '
+        content = """// !$*UTF8*$!
         {
             archiveVersion = 1;
             classes = {
@@ -63,7 +63,10 @@ jobs:
             };
             rootObject = 1C0000512300000100000511 /* Project object */;
         }
-        EOF
+        """
+        with open("AthkarApp.xcodeproj/project.pbxproj", "w") as f:
+            f.write(content)
+        '
 
         # بناء التطبيق بدون توقيع
         xcodebuild clean build \
