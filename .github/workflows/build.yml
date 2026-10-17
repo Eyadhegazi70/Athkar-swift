@@ -20,10 +20,52 @@ jobs:
 
     - name: Create Xcode Project & Build IPA
       run: |
-        # إنشاء هيكل مشروع Xcode وهمي بسيط لبناء الملفات
+        # إنشاء هيكل مشروع Xcode مع ملف الإعدادات project.pbxproj تلقائياً
         mkdir -p AthkarApp.xcodeproj
         
-        # بناء التطبيق بدون التوقيع بـ Developer Certificate
+        cat << 'EOF' > AthkarApp.xcodeproj/project.pbxproj
+        // !$*UTF8*$!
+        {
+            archiveVersion = 1;
+            classes = {
+            };
+            objectVersion = 56;
+            objects = {
+                1C0000012300000100000101 /* AthkarApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AthkarApp.swift; sourceTree = "<group>"; };
+                1C0000022300000100000102 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+                1C0000032300000100000103 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+                1C0000042300000100000104 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+                1C0000052300000100000105 /* IconManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconManager.swift; sourceTree = "<group>"; };
+                1C0000062300000100000106 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+                
+                1C0000112300000100000111 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (1C0000212300000100000211 /* AthkarApp.swift in Sources */, 1C0000222300000100000212 /* ContentView.swift in Sources */, 1C0000232300000100000213 /* LocationManager.swift in Sources */, 1C0000242300000100000214 /* NotificationManager.swift in Sources */, 1C0000252300000100000215 /* IconManager.swift in Sources */); runOnlyForDeploymentPostprocessing = 0; };
+                
+                1C0000212300000100000211 /* AthkarApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0000012300000100000101 /* AthkarApp.swift */; };
+                1C0000222300000100000212 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0000022300000100000102 /* ContentView.swift */; };
+                1C0000232300000100000213 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0000032300000100000103 /* LocationManager.swift */; };
+                1C0000242300000100000214 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0000042300000100000104 /* NotificationManager.swift */; };
+                1C0000252300000100000215 /* IconManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0000052300000100000105 /* IconManager.swift */; };
+                
+                1C0000312300000100000311 /* Products */ = {isa = PBXGroup; children = (1C0000322300000100000312 /* AthkarApp.app */); name = Products; sourceTree = "<group>"; };
+                1C0000322300000100000312 /* AthkarApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AthkarApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+                
+                1C0000412300000100000411 /* Custom */ = {isa = PBXGroup; children = (1C0000012300000100000101 /* AthkarApp.swift */, 1C0000022300000100000102 /* ContentView.swift */, 1C0000032300000100000103 /* LocationManager.swift */, 1C0000042300000100000104 /* NotificationManager.swift */, 1C0000052300000100000105 /* IconManager.swift */, 1C0000062300000100000106 /* Info.plist */, 1C0000312300000100000311 /* Products */); sourceTree = "<group>"; };
+                
+                1C0000512300000100000511 /* Project object */ = {isa = PBXProject; attributes = {LastSwiftUpdateCheck = 1500; LastUpgradeCheck = 1500; TargetAttributes = {1C0000552300000100000515 = {CreatedOnToolsVersion = 15.0;};};}; buildConfigurationList = 1C0000522300000100000512 /* Build configuration list for PBXProject */; compatibilityVersion = "Xcode 12.0"; developmentRegion = en; hasScannedForEncodings = 0; knownRegions = (en, Base); mainGroup = 1C0000412300000100000411 /* Custom */; projectReferences = (); projectRoot = ""; targets = (1C0000552300000100000515 /* AthkarApp */); };
+                
+                1C0000522300000100000512 /* Build configuration list for PBXProject */ = {isa = PBXConfigurationList; buildConfigurations = (1C0000532300000100000513 /* Release */); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+                1C0000532300000100000513 /* Release */ = {isa = PBXBuildConfiguration; buildSettings = {ALWAYS_SEARCH_USER_PATHS = NO; CLANG_ENABLE_MODULES = YES; CLANG_ENABLE_OBJC_ARC = YES; CODE_SIGN_STYLE = Automatic; COPY_PHASE_STRIP = NO; DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym"; ENABLE_NS_ASSERTIONS = NO; ENABLE_STRICT_OBJC_MSGS_ARCHEDICES = NO; SDKROOT = iphoneos; SWIFT_OBJC_BRIDGING_HEADER = ""; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = "1,2"; }; name = Release; };
+                
+                1C0000542300000100000514 /* Build configuration list for PBXTarget */ = {isa = PBXConfigurationList; buildConfigurations = (1C0000562300000100000516 /* Release */); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+                1C0000562300000100000516 /* Release */ = {isa = PBXBuildConfiguration; buildSettings = {ASSETCATALOG_COMPILER_APP_ICON_NAME = AppIcon; CODE_SIGN_IDENTITY = ""; CODE_SIGNING_REQUIRED = NO; CODE_SIGNING_ALLOWED = NO; INFOPLIST_FILE = Info.plist; PRODUCT_BUNDLE_IDENTIFIER = com.eyad.athkarapp; PRODUCT_NAME = "$(TARGET_NAME)"; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = "1,2"; }; name = Release; };
+                
+                1C0000552300000100000515 /* AthkarApp */ = {isa = PBXTarget; buildConfigurationList = 1C0000542300000100000514 /* Build configuration list for PBXTarget */; buildNamesuffix = ""; products = (1C0000322300000100000312 /* AthkarApp.app */); productName = AthkarApp; productEndDate = ""; swiftVersion = "5.0"; buildPhases = (1C0000112300000100000111 /* Sources */); dependencies = (); };
+            };
+            rootObject = 1C0000512300000100000511 /* Project object */;
+        }
+        EOF
+
+        # بناء التطبيق بدون التوقيع
         xcodebuild clean build \
           -project AthkarApp.xcodeproj \
           -scheme AthkarApp \
