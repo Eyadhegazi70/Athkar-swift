@@ -20,14 +20,18 @@ jobs:
 
     - name: Build App & Create IPA
       run: |
-        # بناء التطبيق مباشرة عبر Swift PM بدون ملفات xcodeproj
-        swift build -c release --triple arm64-apple-ios15.0-simulator
-        
-        # تحضير مجلد التطبيق والـ IPA
-        mkdir -p Payload/AthkarApp.app
-        cp -R .build/arm64-apple-ios15.0-simulator/release/AthkarApp Payload/AthkarApp.app/AthkarApp || true
-        cp Info.plist Payload/AthkarApp.app/
-        
+        # بناء تطبيق الـ Swift Package باستخدام xcodebuild الرسمي
+        xcodebuild -scheme AthkarApp \
+                   -destination 'generic/platform=iOS' \
+                   -configuration Release \
+                   CODE_SIGN_IDENTITY="" \
+                   CODE_SIGNING_REQUIRED=NO \
+                   CODE_SIGNING_ALLOWED=NO \
+                   BUILD_DIR=build
+
+        # تجميع ملف الـ IPA
+        mkdir -p Payload
+        cp -R build/Release-iphoneos/AthkarApp.app Payload/ || cp -R build/Release-iphoneos/AthkarApp Payload/AthkarApp.app
         zip -r AthkarApp.ipa Payload
 
     - name: Upload IPA Artifact
